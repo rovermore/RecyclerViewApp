@@ -16,7 +16,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
 
     private List<Book> bookList;
 
-    public BookRecyclerAdapter(List<Book> bookList){
+    public BookRecyclerAdapter(MainActivity mainActivity, List<Book> bookList){
         this.bookList=bookList;
     }
 
@@ -43,9 +43,10 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Book currentBook = bookList.get(position);
-        String [] author = currentBook.getAuthors().toArray(new String[0]);
-        holder.authors.setText(author [0]);
+        String author = currentBook.getAuthors();
+        holder.authors.setText(author);
         holder.title.setText(currentBook.getNameBook());
+        //to extract the actual context and pass it to Glide library
         Context context = holder.authors.getContext();
         Glide.with(context).load(currentBook.getImageUrl()).into(holder.imageView);
 

@@ -14,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QueryUtils {
 
@@ -151,9 +152,9 @@ public class QueryUtils {
 
 
 
-    public static ArrayList<Book> extractBooks (String jSonString) throws JSONException {
+    public static List<Book> extractBooks (String jSonString) throws JSONException {
 
-        ArrayList<Book> bookArrayList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
 
 
         JSONObject jsonBookList = new JSONObject(jSonString);
@@ -172,33 +173,28 @@ public class QueryUtils {
 
             JSONObject imageLinkContainer = volumeInfo.optJSONObject("imageLinks");
 
-            String imageLink = imageLinkContainer.optString("smallThumbnail");
+            String imageLink = "http://books.google.com/books/content?id=DYmUGGwZ8_oC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api";
 
-
-
-            ArrayList<String> authors = new ArrayList<>();
+            if(imageLinkContainer!=null){
+            imageLink = imageLinkContainer.optString("smallThumbnail");
+            }
 
             JSONArray authorJsonList=volumeInfo.optJSONArray("authors");
 
+            String author = "Unknown";
+
             if(authorJsonList!=null) {
 
-                for (int n = 0; n < authorJsonList.length(); n++) {
+                    author = authorJsonList.optString(0);
 
-                    String author = authorJsonList.optString(n);
-
-                    authors.add(author);
-
-                }
             }
 
-            Book book = new Book(authors,title,yearB,imageLink);
+            Book book = new Book(author,title,yearB,imageLink);
 
-            bookArrayList.add(book);
+            bookList.add(book);
 
         }
 
-
-
-        return bookArrayList;
+        return bookList;
     }
 }

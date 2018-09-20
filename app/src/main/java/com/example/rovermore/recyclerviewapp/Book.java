@@ -1,15 +1,13 @@
 package com.example.rovermore.recyclerviewapp;
 
-import java.util.ArrayList;
-
 public class Book {
 
     private String tit;
-    private ArrayList<String> author;
+    private String author;
     private String year;
     private String imageUrl;
 
-    public Book(ArrayList<String> authors, String title, String yy, String imageUrl) {
+    public Book(String authors, String title, String yy, String imageUrl) {
 
 
         this.author = authors;
@@ -28,7 +26,7 @@ public class Book {
         return tit;
     }
 
-    public ArrayList<String> getAuthors(){
+    public String getAuthors(){
 
         return author;
     }
