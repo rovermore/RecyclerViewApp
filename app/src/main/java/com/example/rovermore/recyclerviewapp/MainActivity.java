@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         RecyclerView booksListView = findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                //StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+                //GridLayoutManager(getApplicationContext(),2);
         booksListView.setLayoutManager(mLayoutManager);
         booksListView.setItemAnimator(new DefaultItemAnimator());
 

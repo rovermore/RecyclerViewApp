@@ -39,7 +39,7 @@ public class QueryUtils {
 
         url.append(query);
 
-        url.append("&maxResults=10");
+        url.append("&maxResults=20");
 
         String urlString = String.valueOf(url);
 

@@ -15,9 +15,11 @@ import java.util.List;
 public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapter.MyViewHolder> {
 
     private List<Book> bookList;
+    private Context context;
 
-    public BookRecyclerAdapter(MainActivity mainActivity, List<Book> bookList){
+    public BookRecyclerAdapter(Context context, List<Book> bookList){
         this.bookList=bookList;
+        this.context=context;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -47,8 +49,12 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
         holder.authors.setText(author);
         holder.title.setText(currentBook.getNameBook());
         //to extract the actual context and pass it to Glide library
-        Context context = holder.authors.getContext();
-        Glide.with(context).load(currentBook.getImageUrl()).into(holder.imageView);
+        //Context context = holder.authors.getContext();
+        Glide.with(context)
+                .load(currentBook.getImageUrl())
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .into(holder.imageView);
 
     }
 
